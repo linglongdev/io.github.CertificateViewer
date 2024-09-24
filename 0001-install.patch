@@ -1,0 +1,24 @@
+From 2ef16a87fec96d46eab0a3a557b88a2b46ecae83 Mon Sep 17 00:00:00 2001
+From: wjyrich <1071633242@qq.com>
+Date: Tue, 17 Sep 2024 17:13:46 +0800
+Subject: [PATCH] install
+
+---
+ x509lib/x509lib.pro | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/x509lib/x509lib.pro b/x509lib/x509lib.pro
+index 9b0575e..32f386b 100644
+--- a/x509lib/x509lib.pro
++++ b/x509lib/x509lib.pro
+@@ -37,6 +37,6 @@ HEADERS += \
+ 
+ # Default rules for deployment.
+ unix {
+-    target.path = /usr/lib
++    target.path = $$PREFIX/lib
+ }
+ !isEmpty(target.path): INSTALLS += target
+-- 
+2.43.4
+
