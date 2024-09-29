@@ -1,0 +1,41 @@
+version: "1"
+
+package:
+  id: io.github.CertificateViewer
+  name: CertificateViewer
+  version: 0.0.0.1
+  kind: app
+  description: |
+    Parse X509 based on OpenSSL Implement GUI based on Qt
+
+command:
+  - /opt/apps/io.github.CertificateViewer/files/bin/CertViewer
+
+base: org.deepin.foundation/23.0.0
+runtime: org.deepin.Runtime/23.0.1
+
+sources:
+  - kind: git
+    url: https://github.com/a137748099/CertificateViewer.git
+    version: master
+    commit: 1b015a25f5825e5344791aad789206ff25005f25
+  - kind: git
+    url: https://github.com/a137748099/ParseX509-OpenSSL.git
+    version: master
+    commit: edbcd473aa8f9c5df73474d272749e2e372c6baa
+
+build: |
+  cd /project/linglong/sources/ParseX509-OpenSSL.git
+  git apply ../../../0001-install.patch
+  cd x509lib
+  qmake -makefile PREFIX=${PREFIX} LIB_INSTALL_DIR=${PREFIX}/lib/${TRIPLET}
+  make -j$(nproc)
+  make install
+
+  cd /project/linglong/sources/CertificateViewer.git
+  git apply ../../../0002-install.patch
+  cp CertViewer/icon/icon.png CertViewer/icon/CertViewer.png
+  cd CertViewer
+  qmake -makefile PREFIX=${PREFIX} LIB_INSTALL_DIR=${PREFIX}/lib/${TRIPLET}
+  make -j$(nproc)
+  make install

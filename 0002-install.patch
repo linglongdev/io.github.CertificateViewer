@@ -1,0 +1,54 @@
+From f28f2615fffbcae412b27ca05e1bb7c2a774a1fa Mon Sep 17 00:00:00 2001
+From: wjyrich <1071633242@qq.com>
+Date: Tue, 17 Sep 2024 17:17:47 +0800
+Subject: [PATCH] install
+
+---
+ CertViewer/CertViewer.desktop | 11 +++++++++++
+ CertViewer/CertViewer.pro     | 11 +++++++----
+ 2 files changed, 18 insertions(+), 4 deletions(-)
+ create mode 100644 CertViewer/CertViewer.desktop
+
+diff --git a/CertViewer/CertViewer.desktop b/CertViewer/CertViewer.desktop
+new file mode 100644
+index 0000000..72330f8
+--- /dev/null
++++ b/CertViewer/CertViewer.desktop
+@@ -0,0 +1,11 @@
++[Desktop Entry]
++Categories=Accessibility;Qt;Utility;
++Exec=CertViewer
++Name=CertViewer
++Name[zh_CN]=CertViewer
++Icon=CertViewer
++StartupNotify=false
++Terminal=false
++Type=Application
++GenericName=CertViewer
++Version=1.0
+\ No newline at end of file
+diff --git a/CertViewer/CertViewer.pro b/CertViewer/CertViewer.pro
+index 8f427f3..9d6e03c 100644
+--- a/CertViewer/CertViewer.pro
++++ b/CertViewer/CertViewer.pro
+@@ -54,10 +54,13 @@ win32 {
+     RC_FILE = application.rc
+ }
+ 
+-# Default rules for deployment.
+-qnx: target.path = /tmp/$${TARGET}/bin
+-else: unix:!android: target.path = /opt/$${TARGET}/bin
+-!isEmpty(target.path): INSTALLS += target
++target.path = $$PREFIX/bin
++desktop.files = CertViewer.desktop
++desktop.path = $$PREFIX/share/applications/
++icons.path = $$PREFIX/share/icons/hicolor/apps/
++icons.files = icon/CertViewer.png
++
++INSTALLS += target desktop icons
+ 
+ FORMS += \
+     detailwidget.ui \
+-- 
+2.43.4
+
